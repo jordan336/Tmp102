@@ -24,12 +24,12 @@ TMP102_RC tmp102_init(const char *bus, uint8_t addr)
 TMP102_RC tmp102_read_temp(double *temp)
 {
     uint8_t buf[2];
-    if (i2c_spa_read(&params, 2, buf) != I2C_SPA_OK)
+    if (i2c_spa_read_short(&params, 2, buf) != I2C_SPA_OK)
     {
         return TMP102_FAILURE;
     }
 
-    *temp = (((uint16_t)buf[1] << 8) + buf[0]) >> 4;
+    *temp = (((uint16_t)buf[0] << 8) + buf[1]) >> 4;
     *temp *= TMP102_RESOLUTION;
 
     return TMP102_SUCCESS;
