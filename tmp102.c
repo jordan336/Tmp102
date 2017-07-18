@@ -4,7 +4,7 @@
 
 #include "tmp102.h"
 
-static I2C_SPA_PARAMS params;
+static IO_SPA_I2C_PARAMS params;
 
 TMP102_RC tmp102_init(const char *bus, uint8_t addr)
 {
@@ -13,7 +13,7 @@ TMP102_RC tmp102_init(const char *bus, uint8_t addr)
     params.bus = bus;
 #endif
 
-    if (i2c_spa_init(&params))
+    if (io_spa_i2c_init(&params) != IO_SPA_OK)
     {
         return TMP102_FAILURE;
     }
@@ -24,7 +24,7 @@ TMP102_RC tmp102_init(const char *bus, uint8_t addr)
 TMP102_RC tmp102_read_temp(double *temp)
 {
     uint8_t buf[2];
-    if (i2c_spa_read_short(&params, 2, buf) != I2C_SPA_OK)
+    if (io_spa_i2c_read_short(&params, 2, buf) != IO_SPA_OK)
     {
         return TMP102_FAILURE;
     }
@@ -50,7 +50,7 @@ TMP102_RC tmp102_read_temp_f(double *temp)
 
 TMP102_RC tmp102_close()
 {
-    i2c_spa_close(&params);
+    io_spa_i2c_close(&params);
     return TMP102_SUCCESS;
 }
 
