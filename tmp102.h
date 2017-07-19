@@ -5,7 +5,7 @@
 #ifndef _TMP_102_H
 #define _TMP_102_H
 
-#include "io_spa_i2c.h"
+#include "io_spa.h"
 
 static const double TMP102_RESOLUTION=0.0625;
 
